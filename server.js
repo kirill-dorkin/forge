@@ -8,6 +8,18 @@ app.use(express.urlencoded({ extended: true }));
 
 const DATA_DIR = path.join(__dirname, 'data');
 
+// Ensure data directory and JSON files exist so that the server
+// does not fail when writing to them on first run.
+if (!fs.existsSync(DATA_DIR)) {
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+}
+['services', 'portfolio', 'about', 'team'].forEach(name => {
+  const p = path.join(DATA_DIR, `${name}.json`);
+  if (!fs.existsSync(p)) {
+    fs.writeFileSync(p, '[]');
+  }
+});
+
 function readData(name) {
   const p = path.join(DATA_DIR, `${name}.json`);
   if (!fs.existsSync(p)) return [];
