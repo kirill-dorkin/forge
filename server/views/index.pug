@@ -58,7 +58,11 @@ html(lang='ru')
           each p in portfolio
             .col-lg-4.col-sm-6.mb-4
               .portfolio-item
-                img.img-fluid(src='/' + p.image, alt=p.title)
+                a.portfolio-link(data-bs-toggle='modal', href='#portfolioModal' + p.id)
+                  .portfolio-hover
+                    .portfolio-hover-content
+                      i.fas.fa-plus.fa-3x
+                  img.img-fluid(src='/' + p.image, alt=p.title)
                 .portfolio-caption
                   .portfolio-caption-heading= p.title
                   .portfolio-caption-subheading.text-muted= p.category
@@ -165,6 +169,24 @@ html(lang='ru')
           .col-lg-4.text-lg-end
             a.link-dark.text-decoration-none.me-3(href='#!') Privacy Policy
             a.link-dark.text-decoration-none(href='#!') Terms of Use
+
+    // Portfolio Modals
+    each p in portfolio
+      #{'portfolioModal' + p.id}.portfolio-modal.modal.fade(tabindex='-1', role='dialog', aria-hidden='true')
+        .modal-dialog
+          .modal-content
+            .close-modal(data-bs-dismiss='modal')
+              img(src='/assets/img/close-icon.svg', alt='Close modal')
+            .container
+              .row.justify-content-center
+                .col-lg-8
+                  .modal-body
+                    h2.text-uppercase= p.title
+                    p.item-intro.text-muted= p.category
+                    img.img-fluid.d-block.mx-auto(src='/' + p.image, alt=p.title)
+                    button.btn.btn-primary.btn-xl.text-uppercase(data-bs-dismiss='modal', type='button')
+                      i.fas.fa-xmark.me-1
+                      | Закрыть
 
     script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js')
     script(src='/js/scripts.js')
