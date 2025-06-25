@@ -1,8 +1,0 @@
-[
-  {"id":1, "title":"Меч", "category":"Художественная ковка", "image":"assets/img/portfolio/1.jpg"},
-  {"id":2, "title":"Щит", "category":"Художественная ковка", "image":"assets/img/portfolio/2.jpg"},
-  {"id":3, "title":"Подкова", "category":"Художественная ковка", "image":"assets/img/portfolio/3.jpg"},
-  {"id":4, "title":"Украшение", "category":"Художественная ковка", "image":"assets/img/portfolio/4.jpg"},
-  {"id":5, "title":"Латы", "category":"Художественная ковка", "image":"assets/img/portfolio/5.jpg"},
-  {"id":6, "title":"Декор", "category":"Художественная ковка", "image":"assets/img/portfolio/6.jpg"}
-]
