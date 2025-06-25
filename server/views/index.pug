@@ -112,5 +112,60 @@ html(lang='ru')
                 h4= t.name
                 p.text-muted= t.role
 
+    // Контакты
+    section#contact.page-section
+      .container
+        .text-center
+          h2.section-heading.text-uppercase Контакты
+          h3.section-subheading.text-muted Свяжитесь с нами для заказа.
+
+        form#contactForm(data-sb-form-api-token='API_TOKEN')
+          .row.align-items-stretch.mb-5
+            .col-md-6
+              .form-group
+                // Name input
+                input#name.form-control(type='text', placeholder='Ваше имя *', data-sb-validations='required')
+                .invalid-feedback(data-sb-feedback='name:required') Введите имя.
+              .form-group
+                // Email address input
+                input#email.form-control(type='email', placeholder='Ваш Email *', data-sb-validations='required,email')
+                .invalid-feedback(data-sb-feedback='email:required') Введите email.
+                .invalid-feedback(data-sb-feedback='email:email') Неверный email.
+              .form-group.mb-md-0
+                // Phone number input
+                input#phone.form-control(type='tel', placeholder='Ваш телефон *', data-sb-validations='required')
+                .invalid-feedback(data-sb-feedback='phone:required') Введите телефон.
+            .col-md-6
+              .form-group.form-group-textarea.mb-md-0
+                // Message input
+                textarea#message.form-control(placeholder='Ваше сообщение *', data-sb-validations='required')
+                .invalid-feedback(data-sb-feedback='message:required') Введите сообщение.
+          #submitSuccessMessage.d-none
+            .text-center.text-white.mb-3
+              .fw-bolder Form submission successful!
+              | To activate this form, sign up at
+              br
+              a(href='https://startbootstrap.com/solution/contact-forms') https://startbootstrap.com/solution/contact-forms
+          #submitErrorMessage.d-none
+            .text-center.text-danger.mb-3 Error sending message!
+          .text-center
+            button#submitButton.btn.btn-primary.btn-xl.text-uppercase.disabled(type='submit') Отправить
+
+    footer.footer.py-4
+      .container
+        .row.align-items-center
+          .col-lg-4.text-lg-start Copyright © Кузница Д.Гена 2023
+          .col-lg-4.my-3.my-lg-0
+            a.btn.btn-dark.btn-social.mx-2(href='#!', aria-label='Twitter')
+              i.fab.fa-twitter
+            a.btn.btn-dark.btn-social.mx-2(href='#!', aria-label='Facebook')
+              i.fab.fa-facebook-f
+            a.btn.btn-dark.btn-social.mx-2(href='#!', aria-label='LinkedIn')
+              i.fab.fa-linkedin-in
+          .col-lg-4.text-lg-end
+            a.link-dark.text-decoration-none.me-3(href='#!') Privacy Policy
+            a.link-dark.text-decoration-none(href='#!') Terms of Use
+
     script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js')
     script(src='/js/scripts.js')
+    script(src='https://cdn.startbootstrap.com/sb-forms-latest.js')
