@@ -10,7 +10,8 @@
         "build:scss": "node scripts/build-scss.js",
         "clean": "node scripts/clean.js",
         "start": "npm run build && node scripts/start.js",
-        "start:debug": "npm run build && node scripts/start-debug.js"
+        "start:debug": "npm run build && node scripts/start-debug.js",
+        "serve": "node server.js"
     },
     "description": "Сайт кузницы \"Д.Гена\" на основе шаблона Bootstrap.",
     "keywords": [
@@ -36,7 +37,8 @@
         "url": "https://github.com/StartBootstrap/startbootstrap-agency.git"
     },
     "dependencies": {
-        "bootstrap": "5.2.3"
+        "bootstrap": "5.2.3",
+        "express": "4.18.2"
     },
     "devDependencies": {
         "autoprefixer": "10.4.14",
