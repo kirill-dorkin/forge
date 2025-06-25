@@ -1,0 +1,116 @@
+doctype html
+html(lang='ru')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    title Кузница Д.Гена
+    link(rel='icon', type='image/x-icon', href='/assets/favicon.ico')
+    script(src='https://use.fontawesome.com/releases/v6.3.0/js/all.js', crossorigin='anonymous')
+    link(href='https://fonts.googleapis.com/css?family=Montserrat:400,700', rel='stylesheet', type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700', rel='stylesheet', type='text/css')
+    link(href='/css/styles.css', rel='stylesheet')
+  body#page-top
+    nav#mainNav.navbar.navbar-expand-lg.navbar-dark.fixed-top
+      .container
+        a.navbar-brand(href='#page-top')
+          img(src='/assets/img/navbar-logo.svg', alt='...')
+        button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
+          | Menu
+          i.fas.fa-bars.ms-1
+        #navbarResponsive.collapse.navbar-collapse
+          ul.navbar-nav.text-uppercase.ms-auto.py-4.py-lg-0
+            li.nav-item
+              a.nav-link(href='#services') Услуги
+            li.nav-item
+              a.nav-link(href='#portfolio') Портфолио
+            li.nav-item
+              a.nav-link(href='#about') О нас
+            li.nav-item
+              a.nav-link(href='#team') Команда
+            li.nav-item
+              a.nav-link(href='#contact') Контакты
+    header.masthead
+      .container
+        .masthead-subheading Добро пожаловать в кузницу Д.Гена!
+        .masthead-heading.text-uppercase Мы рады вас видеть
+        a.btn.btn-primary.btn-xl.text-uppercase(href='#services') Узнать больше
+
+    section#services.page-section
+      .container
+        .text-center
+          h2.section-heading.text-uppercase Услуги
+          h3.section-subheading.text-muted Лучшие кузнечные услуги.
+        .row.text-center
+          each s in services
+            .col-md-4
+              span.fa-stack.fa-4x
+                i.fas.fa-circle.fa-stack-2x.text-primary
+                i(class=`fas fa-${s.icon} fa-stack-1x fa-inverse`)
+              h4.my-3= s.name
+              p.text-muted= s.description
+
+    section#portfolio.page-section.bg-light
+      .container
+        .text-center
+          h2.section-heading.text-uppercase Портфолио
+          h3.section-subheading.text-muted Наши работы.
+        .row
+          each p in portfolio
+            .col-lg-4.col-sm-6.mb-4
+              .portfolio-item
+                img.img-fluid(src='/' + p.image, alt=p.title)
+                .portfolio-caption
+                  .portfolio-caption-heading= p.title
+                  .portfolio-caption-subheading.text-muted= p.category
+
+    section#about.page-section
+      .container
+        .text-center
+          h2.section-heading.text-uppercase О нас
+          h3.section-subheading.text-muted Как мы начинали и развивались.
+        ul.timeline
+          each a, i in about
+            if i % 2 === 0
+              li
+                .timeline-image
+                  img.rounded-circle.img-fluid(src='/' + a.image, alt='')
+                .timeline-panel
+                  .timeline-heading
+                    h4= a.year
+                    h4.subheading= a.title
+                  .timeline-body
+                    p.text-muted= a.description
+            else
+              li.timeline-inverted
+                .timeline-image
+                  img.rounded-circle.img-fluid(src='/' + a.image, alt='')
+                .timeline-panel
+                  .timeline-heading
+                    h4= a.year
+                    h4.subheading= a.title
+                  .timeline-body
+                    p.text-muted= a.description
+          li.timeline-inverted
+            .timeline-image
+              h4
+                | Станьте
+                br
+                | частью нашей
+                br
+                | истории!
+
+    section#team.page-section.bg-light
+      .container
+        .text-center
+          h2.section-heading.text-uppercase Наша команда
+          h3.section-subheading.text-muted Опытные мастера своего дела.
+        .row
+          each t in team
+            .col-lg-4
+              .team-member
+                img.mx-auto.rounded-circle(src='/' + t.image, alt='')
+                h4= t.name
+                p.text-muted= t.role
+
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js')
+    script(src='/js/scripts.js')

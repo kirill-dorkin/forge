@@ -1,0 +1,5 @@
+[
+  {"id":1, "name":"Геннаий Д.", "role":"Главный кузнец", "image":"assets/img/team/1.jpg"},
+  {"id":2, "name":"Иван Петров", "role":"Помощник", "image":"assets/img/team/2.jpg"},
+  {"id":3, "name":"Алексей Сидоров", "role":"Ученик", "image":"assets/img/team/3.jpg"}
+]

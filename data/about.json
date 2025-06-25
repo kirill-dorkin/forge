@@ -1,0 +1,6 @@
+[
+  {"id":1, "year":"2009-2011", "title":"Наше скромное начало", "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit.", "image":"assets/img/about/1.jpg"},
+  {"id":2, "year":"March 2011", "title":"Открытие кузницы", "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit.", "image":"assets/img/about/2.jpg"},
+  {"id":3, "year":"December 2015", "title":"Расширение услуг", "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit.", "image":"assets/img/about/3.jpg"},
+  {"id":4, "year":"July 2020", "title":"Новая мастерская", "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit.", "image":"assets/img/about/4.jpg"}
+]
