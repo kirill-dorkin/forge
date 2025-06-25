@@ -3,15 +3,19 @@ const path = require('path');
 const fs = require('fs');
 
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
 const DATA_DIR = path.join(__dirname, 'data');
+const UPLOAD_DIR = path.join(__dirname, 'uploads');
 
 // Ensure data directory and JSON files exist so that the server
 // does not fail when writing to them on first run.
 if (!fs.existsSync(DATA_DIR)) {
   fs.mkdirSync(DATA_DIR, { recursive: true });
+}
+if (!fs.existsSync(UPLOAD_DIR)) {
+  fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 }
 ['services', 'portfolio', 'about', 'team'].forEach(name => {
   const p = path.join(DATA_DIR, `${name}.json`);
@@ -39,6 +43,16 @@ function registerCrudRoutes(name) {
   app.post(base, (req, res) => {
     const items = readData(name);
     const item = req.body;
+    if (item.imageData) {
+      const match = item.imageData.match(/^data:(.+);base64,(.+)$/);
+      if (match) {
+        const ext = match[1].split('/')[1] || 'png';
+        const fileName = Date.now() + '.' + ext;
+        fs.writeFileSync(path.join(UPLOAD_DIR, fileName), Buffer.from(match[2], 'base64'));
+        item.image = path.join('uploads', fileName);
+      }
+      delete item.imageData;
+    }
     item.id = items.length ? Math.max(...items.map(i => i.id)) + 1 : 1;
     items.push(item);
     writeData(name, items);
@@ -49,7 +63,18 @@ function registerCrudRoutes(name) {
     const items = readData(name);
     const idx = items.findIndex(i => i.id === id);
     if (idx === -1) return res.sendStatus(404);
-    items[idx] = { ...items[idx], ...req.body, id };
+    const updated = { ...req.body };
+    if (updated.imageData) {
+      const match = updated.imageData.match(/^data:(.+);base64,(.+)$/);
+      if (match) {
+        const ext = match[1].split('/')[1] || 'png';
+        const fileName = Date.now() + '.' + ext;
+        fs.writeFileSync(path.join(UPLOAD_DIR, fileName), Buffer.from(match[2], 'base64'));
+        updated.image = path.join('uploads', fileName);
+      }
+      delete updated.imageData;
+    }
+    items[idx] = { ...items[idx], ...updated, id };
     writeData(name, items);
     res.json(items[idx]);
   });
@@ -69,6 +94,7 @@ function registerCrudRoutes(name) {
 app.use('/assets', express.static(path.join(__dirname, 'dist/assets')));
 app.use('/css', express.static(path.join(__dirname, 'dist/css')));
 app.use('/js', express.static(path.join(__dirname, 'dist/js')));
+app.use('/uploads', express.static(UPLOAD_DIR));
 app.use('/admin', express.static(path.join(__dirname, 'admin')));
 
 app.set('view engine', 'pug');
